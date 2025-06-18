@@ -1,0 +1,63 @@
+Splunk
+ 
+sudo su - app-user
+mkdir -p /data/EVM/
+aws s3 cp s3://gov-dos-producer-global-np-stage-dev/temp/EVM/splunkforwarder-9.3.1-0b8d769cb912-Linux-x86_64.tgz /data/EVM/ --profile govqa
+aws s3 cp s3://gov-dos-producer-global-np-stage-dev/talend/apcdnap1/splunkforwarder-9.3.4-30e72d3fb5f7-Linux-x86_64.tgz /app/EVM/ --profile govqa
+ 
+aws s3 ls s3://gov-dos-producer-global-np-stage-dev/talend/apcdnap1/splunkforwarder-9.3.4-30e72d3fb5f7-Linux-x86_64.tgz /app/EVM/ --profile govqa
+ 
+aws s3 ls s3://gov-dos-producer-global-np-stage-dev/talend/apcdnap1/ --profile govqa
+===switch back to root====
+exit
+/opt/splunkforwarder/bin/splunk version
+/opt/splunkforwarder/bin/splunk stop
+/opt/splunkforwarder/bin/splunk disable boot-start
+rm -rf /opt/splunkforwarder
+cd /data/EVM_1605/
+tar -xzvf splunkforwarder-9.3.4-30e72d3fb5f7-Linux-x86_64.tgz -C /opt
+/opt/splunkforwarder/bin/splunk start --answer-yes --no-prompt --accept-license --seed-passwd VA9wUqSvTanYhKGpd7XH3g
+/opt/splunkforwarder/bin/splunk stop -auth admin:VA9wUqSvTanYhKGpd7XH3g
+/opt/splunkforwarder/bin/splunk enable boot-start -user root
+/opt/splunkforwarder/bin/splunk start
+/opt/splunkforwarder/bin/splunk version
+ 
+sudo mkdir -p /opt/splunkforwarder/etc/apps/gea_all_deploymentclients
+sudo mkdir -p /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/metadata
+sudo mkdir -p /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/local
+ 
+ 
+sudo touch /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/metadata/local.meta
+sudo touch /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/local/app.conf
+sudo touch /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/local/deploymentclient.conf
+ 
+sudo chmod 777 /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/metadata/local.meta
+sudo chmod 777 /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/local/app.conf
+sudo chmod 777 /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/local/deploymentclient.conf
+ 
+ 
+cat << EOF >> /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/local/app.conf
+[install]
+state = enabled
+ 
+[package]
+check_for_updates = false
+ 
+[ui]
+is_visible = false
+is_manageable = false
+EOF
+ 
+ 
+cat << EOF >> /opt/splunkforwarder/etc/apps/gea_all_deploymentclients/local/deploymentclient.conf
+[deployment-client]
+# Set the phoneHome at the end of the PS engagement
+# 10 minutes
+phoneHomeIntervalInSecs = 300
+ 
+[target-broker:deploymentServer]
+# Change the targetUri
+targetUri = https://aos-ds-splunk.geaerospace.com:443
+EOF
+ 
+sudo /opt/splunkforwarder/bin/splunk restart
