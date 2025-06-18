@@ -1,0 +1,33 @@
+GIT --Git means a distributed version control system used to track changes in files, especially source code, 
+	allowing multiple developers to collaborate on projects efficiently. It enables tracking changes, 
+	creating branches for parallel development, and managing different versions of code over time. 
+
+-- Remote Repository
+-- Local repository
+-- staging area
+-- working directory
+
+Remote Repository
+A remote repository is a version of your project that is hosted on the internet or another network. 
+It allows multiple collaborators to work together and share changes. Common platforms include GitHub, GitLab, and Bitbucket.
+
+Local Repository
+A local repository is a version of your project that exists on your personal machine. 
+It contains all the project's files, history, and branches, allowing you to work offline and commit changes locally.
+
+Staging Area
+The staging area (or index) is where you prepare changes before committing them to your local repository.
+You can selectively choose which changes to include in your next commit, allowing for more granular control over your project’s history.
+
+Working Directory
+The working directory is the current state of your project files on your local machine.
+It includes all the files you are currently editing and reflects the latest changes made.
+You can think of it as the "live" version of your project where you make modifications.
+
+GitHub is a web-based interface that uses Git, the open source version control software that lets multiple people
+ 	make separate changes to web pages at the same time. As Carpenter notes, because it allows for real-time collaboration,
+ 	GitHub encourages teams to work together to build and edit their site content.
+
+What is GitHub used for? GitHub allows you to create, store, change, merge, and collaborate on files or code.
+	Any team member can access the GitHub repository (think of this as a folder for files) and see the most recent version in real time.
+	Then, they can make edits or changes that the other collaborators also see
