@@ -1,0 +1,25 @@
+git init -- to insitalize a repository
+git clone <repository-url>-- clone a remote repository
+git status -- check repository status
+git add <file name>-- add changes to staging area
+git add .  -- to add all changes to staging area
+git commit -m "Your commit message" -- to commit chnages to local repository
+git log -- View commit history
+git branch <branch name> -- Creating a new branch
+git checkout <branch name> -- to switch branch
+git checkout -b <branchname> -- to create and switch to a new branch
+git merge <branch name> -- to merge a branch into current branch
+git remote -v  -- view remote repostories
+git remote add <name> <repository-url> -- Add a Remote Repository
+git push <remote-name> <branch-name> -- Push Changes to Remote Repository
+git pull <remote-name> <branch-name> -- Pull Changes from Remote Repository
+
+Other Useful Commands:
+
+git checkout -- <file-name> -- Discard Changes in Working Directory
+
+git reset <file-name>-- Remove Files from Staging Area
+
+git diff -- View Differences
+
+git stash -- Stash Changes
